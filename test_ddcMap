@@ -4,7 +4,6 @@ function ddcIxtheo() {
 	var ddcMapIxth = {
 		// 5010 : 6700
 		"5010" : {
-			"200" : "!372044085!",
 			"220" : "!372044085!",
 			"221" : "!372044123!",
 			"222" : "!372044123!",
@@ -58,7 +57,7 @@ function ddcIxtheo() {
 	for (var i = 1; i <= count; i++) {
 		var cmd = "k " + strSet + " " + i;
 		application.activeWindow.command(cmd, false);
-		str7100 = application.activeWindow.title.findTag("7100", 1, true, true, true);
+		str7100 = application.activeWindow.title.findTag("7100", 0, true, true, true);
 		/*
 		if (str6700 != "") {
 			application.activeWindow.pressButton("Enter");
@@ -75,7 +74,6 @@ function ddcIxtheo() {
 			
 		//	application.activeWindow.title.insertText("\ntag: " + tag);
 		//	application.activeWindow.title.insertText("\nvalues: " + keys);
-		
 			var key_splits = keys.split(";");
 			key_loop: for (var key_split in key_splits) {
 				var current_key = key_splits[key_split].trim();
@@ -156,5 +154,5 @@ function ddcIxtheo() {
 				}
 			}
 			application.activeWindow.pressButton("Enter");
+		}
 	}	
-}	
