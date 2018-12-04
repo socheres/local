@@ -1,0 +1,160 @@
+//insert DDC>ixtheo-notation
+function ddcIxtheo() {
+	//map ddc 297 automatically
+	var ddcMapIxth = {
+		// 5010 : 6700
+		"5010" : {
+			"200" : "!372044085!",
+			"220" : "!372044085!",
+			"221" : "!372044123!",
+			"222" : "!372044123!",
+			"223.906" : "!372044123!", 
+			"223" : "!372044166!",
+			"224" : "!372044123!",
+			"225" : "!372044131!",
+			"226" : "!372044131!",
+			"227" : "!372044131!",
+			"228" : "!372044131!",
+			"229" : "!372044131!",
+		},
+		"5401" : {
+			"220" : "!372044085!",
+			"221" : "!372044123!",
+			"222" : "!372044123!",
+			"223.906" : "!372044123!",
+			"223" : "!372044166!",
+			"224" : "!372044123!",
+			"225" : "!372044131!",
+			"226" : "!372044131!",
+			"227" : "!372044131!",
+			"228" : "!372044131!",
+			"229" : "!372044131!",
+		},
+		//"5090" : {
+		//	"" : "!372044131!",
+		//	"" : "!372044131!",
+		//}
+		"5051" : {
+			"230" : "!37205241X!",
+			"220" : "!372044085!",
+		}
+	}
+
+	//var escapeRegExp = function escapeRegExp(str) { return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"); }
+
+	//application.activeWindow.command("f snr casalin* abl ixbt", false);
+	var str4801 = "";
+	var str5010 = "";
+	var str5401 = "";
+	var str6700 = "";
+	var str7100 = "";
+
+	// Abruf des Sets + Nummer
+	var strSet = "S" + application.activeWindow.getVariable("P3GSE");
+	// Abruf der Setgröße (Sätze gesamt)
+	var strCount = application.activeWindow.getVariable("P3GSZ");
+	var count = parseInt(strCount);
+
+	for (var i = 1; i <= count; i++) {
+		var cmd = "k " + strSet + " " + i;
+		application.activeWindow.command(cmd, false);
+		str7100 = application.activeWindow.title.findTag("7100", 1, true, true, true);
+		/*
+		if (str6700 != "") {
+			application.activeWindow.pressButton("Enter");
+			continue;
+		}
+		*/
+		for (var tag in ddcMapIxth) {
+			var pair = ddcMapIxth[tag];
+			strKey = application.activeWindow.title.findTag(tag, 0, true, true, true);
+			//strKey = strKey.replace(/\[(.*?)\]$/g, "");
+			
+			var tag = strKey.substring(0, 4);
+			var keys = strKey.substring(5);
+			
+		//	application.activeWindow.title.insertText("\ntag: " + tag);
+		//	application.activeWindow.title.insertText("\nvalues: " + keys);
+		
+			var key_splits = keys.split(";");
+			key_loop: for (var key_split in key_splits) {
+				var current_key = key_splits[key_split].trim();
+				
+				// exact matching				
+				for (var ddc_key in pair) {
+					var value = pair[ddc_key];									
+					if (current_key == ddc_key) {
+						str4801 = application.activeWindow.title.findTag("4801", 0, true, true, true);
+						str6700 = application.activeWindow.title.findTag("6700", 0, true, true, true);
+						if (str7100.match(/Tü 135/g) && !str4801 && !str6700) {
+							application.activeWindow.title.endOfBuffer(false);
+							application.activeWindow.title.insertText("\n4801 6700  maschinelles Mapping DDC " + ddc_key + "> " + value);
+							application.activeWindow.title.insertText("\n6700" + value);
+							continue key_loop;
+						} else if (str7100.match(/Tü 135/g) && str4801 && !str6700){
+							application.activeWindow.title.endOfBuffer(false);
+							application.activeWindow.title.findTag("4801", 0, true, true, true);
+							application.activeWindow.title.insertText(str4801 + ". - 6700  maschinelles Mapping DDC " + ddc_key + "> " + value);
+							continue key_loop;
+						} else if (str7100.match(/Tü 135/g) && !str4801 && str6700){
+							application.activeWindow.title.endOfBuffer(false);
+							application.activeWindow.title.findTag("4801", 0, true, true, true);
+							application.activeWindow.title.insertText("\n4801 6700  maschinelles Mapping DDC " + ddc_key + "> " + value);
+							application.activeWindow.title.insertText("\n6700 " + value);
+							continue key_loop;
+						} else if (str7100.match(/Tü 135/g) && str4801 && str6700){
+							application.activeWindow.title.endOfBuffer(false);
+							application.activeWindow.title.findTag("4801", 0, true, true, true);
+							application.activeWindow.title.insertText(str4801 + ". - 6700  maschinelles Mapping DDC " + ddc_key + "> " + value + "\n6700 " + value);
+							continue key_loop;
+						} else if (!str7100.match(/Tü 135/g)) {
+							application.activeWindow.title.endOfBuffer(false);
+							application.activeWindow.title.insertText("\nE*  l01\n7100$jn\n6700 " + value + " \n4801 6700 maschinelles Mapping DDC " + ddc_key + "> " + value);
+							continue key_loop;
+						}
+					}
+				}
+			}
+				
+				// partial matching
+				for (var ddc_key in pair) {
+					var value = pair[ddc_key];
+									
+				//	application.activeWindow.title.insertText("\ncurrent key: " + current_key);
+				//	application.activeWindow.title.insertText("\nddc key: " + ddc_key);
+				//	application.activeWindow.title.insertText("\nppn: " + value);
+					if (current_key.startsWith(ddc_key)) {
+						str4801 = application.activeWindow.title.findTag("4801", 0, true, true, true);
+						str6700 = application.activeWindow.title.findTag("6700", 0, true, true, true);
+							if (str7100.match(/Tü 135/g) && !str4801 && !str6700) {
+							application.activeWindow.title.endOfBuffer(false);
+							application.activeWindow.title.insertText("\n4801 6700  maschinelles Mapping DDC " + ddc_key + "> " + value);
+							application.activeWindow.title.insertText("\n6700" + value);
+							break;
+						} else if (str7100.match(/Tü 135/g) && str4801 && !str6700){
+							application.activeWindow.title.endOfBuffer(false);
+							application.activeWindow.title.findTag("4801", 0, true, true, true);
+							application.activeWindow.title.insertText(str4801 + ". - 6700  maschinelles Mapping " + ddc_key + "> " + value);
+							break;
+						} else if (str7100.match(/Tü 135/g) && !str4801 && str6700){
+							application.activeWindow.title.endOfBuffer(false);
+							application.activeWindow.title.findTag("4801", 0, true, true, true);
+							application.activeWindow.title.insertText("\n4801 6700  maschinelles Mapping DDC " + ddc_key + "> " + value);
+							application.activeWindow.title.insertText("\n6700 " + value);
+							break;
+						} else if (str7100.match(/Tü 135/g) && str4801 && str6700){
+							application.activeWindow.title.endOfBuffer(false);
+							application.activeWindow.title.findTag("4801", 0, true, true, true);
+							application.activeWindow.title.insertText(str4801 + ". - 6700  maschinelles Mapping DDC " + ddc_key + "> " + value + "\n6700 " + value);
+							break;
+						} else if (!str7100.match(/Tü 135/g)) {
+							application.activeWindow.title.endOfBuffer(false);
+							application.activeWindow.title.insertText("\nE*  l01\n7100$jn\n6700 " + value + " \n4801 6700 maschinelles Mapping DDC " + ddc_key + "> " + value);
+							break;
+						}
+					}
+				}
+			}
+			application.activeWindow.pressButton("Enter");
+	}	
+}	
