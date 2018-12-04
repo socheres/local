@@ -4,6 +4,7 @@ function ddcIxtheo() {
 	var ddcMapIxth = {
 		// 5010 : 6700
 		"5010" : {
+			"200" : "!372044166!",
 			"220" : "!372044085!",
 			"221" : "!372044123!",
 			"222" : "!372044123!",
@@ -79,7 +80,7 @@ function ddcIxtheo() {
 				var current_key = key_splits[key_split].trim();
 				
 				// exact matching				
-				for (var ddc_key in pair) {
+				/*for (var ddc_key in pair) {
 					var value = pair[ddc_key];									
 					if (current_key == ddc_key) {
 						str4801 = application.activeWindow.title.findTag("4801", 0, true, true, true);
@@ -111,8 +112,8 @@ function ddcIxtheo() {
 							continue key_loop;
 						}
 					}
-				}
-			}
+				}*/
+			
 				
 				// partial matching
 				for (var ddc_key in pair) {
@@ -128,31 +129,32 @@ function ddcIxtheo() {
 							application.activeWindow.title.endOfBuffer(false);
 							application.activeWindow.title.insertText("\n4801 6700  maschinelles Mapping DDC " + ddc_key + "> " + value);
 							application.activeWindow.title.insertText("\n6700" + value);
-							break;
+							continue key_loop;
 						} else if (str7100.match(/Tü 135/g) && str4801 && !str6700){
 							application.activeWindow.title.endOfBuffer(false);
 							application.activeWindow.title.findTag("4801", 0, true, true, true);
 							application.activeWindow.title.insertText(str4801 + ". - 6700  maschinelles Mapping " + ddc_key + "> " + value);
-							break;
+							continue key_loop;
 						} else if (str7100.match(/Tü 135/g) && !str4801 && str6700){
 							application.activeWindow.title.endOfBuffer(false);
 							application.activeWindow.title.findTag("4801", 0, true, true, true);
 							application.activeWindow.title.insertText("\n4801 6700  maschinelles Mapping DDC " + ddc_key + "> " + value);
 							application.activeWindow.title.insertText("\n6700 " + value);
-							break;
+							continue key_loop;
 						} else if (str7100.match(/Tü 135/g) && str4801 && str6700){
 							application.activeWindow.title.endOfBuffer(false);
 							application.activeWindow.title.findTag("4801", 0, true, true, true);
 							application.activeWindow.title.insertText(str4801 + ". - 6700  maschinelles Mapping DDC " + ddc_key + "> " + value + "\n6700 " + value);
-							break;
+							continue key_loop;
 						} else if (!str7100.match(/Tü 135/g)) {
 							application.activeWindow.title.endOfBuffer(false);
 							application.activeWindow.title.insertText("\nE*  l01\n7100$jn\n6700 " + value + " \n4801 6700 maschinelles Mapping DDC " + ddc_key + "> " + value);
-							break;
+							continue key_loop;
 						}
 					}
 				}
 			}
-			application.activeWindow.pressButton("Enter");
 		}
-	}	
+		application.activeWindow.pressButton("Enter");
+	}
+}
