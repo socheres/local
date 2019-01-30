@@ -15,12 +15,12 @@ function ddcIxTheoMatchHierarchy(str7100, notationList, ddcKey, partialMatching)
 
 					if (!str4801 && !str6700) {
 						// add both 4801 and 6700 entries
-						application.activeWindow.title.insertText("\n4801 6700  maschinelles Mapping DDC " + ddcKey + "> " + notationPPN);
+						application.activeWindow.title.insertText("\n4801 6700  maschinelles Mapping DDC " + notationKey + " > " + notationPPN);
 						application.activeWindow.title.insertText("\n6700 " + notationPPN.replace(/ /g, '\n6700'));
 					} else if (str4801 && !str6700) {
 						// update exisiting 4801 entry and add new 6700 entries
 						application.activeWindow.title.findTag("4801", 0, true, true, true);
-						application.activeWindow.title.insertText(str4801 + ". - 6700  maschinelles Mapping DDC " + ddcKey + "> " + notationPPN);
+						application.activeWindow.title.insertText(str4801 + ". - 6700  maschinelles Mapping DDC " + notationKey + " > " + notationPPN);
 						application.activeWindow.title.insertText("\n6700 " + notationPPN.replace(/ /g, '\n6700'));
 					} else if (!str4801 && str6700) {
 						;// do nothing
@@ -28,7 +28,7 @@ function ddcIxTheoMatchHierarchy(str7100, notationList, ddcKey, partialMatching)
 						;// do nothing
 					}
 				} else {
-					application.activeWindow.title.insertText("\nE* l01\n7100$jn\n6700 " + ppn.replace(/ /g, '\n6700') + " \n4801 6700 maschinelles Mapping DDC " + ddcKey + "> " + notationPPN);
+					application.activeWindow.title.insertText("\nE* l01\n7100$jn\n6700 " + ppn.replace(/ /g, '\n6700') + " \n4801 6700 maschinelles Mapping DDC " + notationKey + " > " + notationPPN);
 				}
 
 				return true;
