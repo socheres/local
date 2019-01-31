@@ -1,46 +1,5 @@
 //kim, timotheus chang whae | Madeesh
 //30.01.2019
-function ddcIxTheoMatchHierarchy(str7100, notationList, ddcKey, partialMatching) {
-	for (var notationHierarchyEntry in notationList) {
-		var notation2ppnMap = notationList[notationHierarchyEntry];
-		for (var notationKey in notation2ppnMap) {
-			var notationPPN = notation2ppnMap[notationKey];
-
-			if ((!partialMatching && notationKey === ddcKey) || (partialMatching && ddcKey.startsWith(notationKey))) {
-				var str4801 = application.activeWindow.title.findTag("4801", 0, true, true, true);
-				var str6700 = application.activeWindow.title.findTag("6700", 0, true, true, true);
-
-				if (str7100.match(/Tü 135/g)) {
-					application.activeWindow.title.endOfBuffer(false);
-
-					if (!str4801 && !str6700) {
-						// add both 4801 and 6700 entries
-						application.activeWindow.title.insertText("\n4801 6700  maschinelles Mapping DDC " + notationKey + " > " + notationPPN);
-						application.activeWindow.title.insertText("\n6700 " + notationPPN.replace(/ /g, '\n6700'));
-					} else if (str4801 && !str6700) {
-						// update exisiting 4801 entry and add new 6700 entries
-						application.activeWindow.title.findTag("4801", 0, true, true, true);
-						application.activeWindow.title.insertText(str4801 + ". - 6700  maschinelles Mapping DDC " + notationKey + " > " + notationPPN);
-						application.activeWindow.title.insertText("\n6700 " + notationPPN.replace(/ /g, '\n6700'));
-					} else if (!str4801 && str6700) {
-						;// do nothing
-					} else if (str4801 && str6700) {
-						;// do nothing
-					}
-				} else {
-					application.activeWindow.title.insertText("\nE* l01\n7100$jn\n6700 " + ppn.replace(/ /g, '\n6700') + " \n4801 6700 maschinelles Mapping DDC " + notationKey + " > " + notationPPN);
-				}
-
-				return true;
-			}
-		}
-	}
-
-	return false;
-};
-
-
-//insert DDC>ixtheo-notation
 function ddcIxtheo_test() {
 	// Um eine Hierarchie zu simulieren (bei Partial-Matching), müssen die Kategorien abstigend von Genauigkeit geprüft werden
 	// d.h die spezifizierten Notationen müssen vor den allgemeineren berücksichtigt werden
@@ -761,4 +720,32 @@ function ddcIxtheo_test() {
 
 		application.activeWindow.pressButton("Enter");
 	}
+}
+
+function messData() {
+	//var str4801 = "";
+	var str6700 = "";
+	// Abruf des Sets + Nummer
+	var strSet = "S" + application.activeWindow.getVariable("P3GSE");
+	// Abruf der Setgröße (Sätze gesamt)
+	var strCount = application.activeWindow.getVariable("P3GSZ");       
+	var count = parseInt(strCount);
+	
+	for (var i = 1; i <= count; i++) {
+
+                var cmd = "k " + strSet + " " + i;   
+                application.activeWindow.command(cmd, false);
+                //str4801 = application.activeWindow.title.findTag("4801", 0, true, true, true);
+				str6700 = application.activeWindow.title.findTag("6700", 0, true, true, true);
+				
+if (str6700)
+		{        
+                //application.activeWindow.title.findTag("4801", 0, true, true, true);
+                //application.activeWindow.title.deleteLine(1);
+				application.activeWindow.title.findTag("6700", 0, true, true, true);
+				application.activeWindow.title.deleteLine(1);
+                application.activeWindow.pressButton("Enter");
+			}	
+		}
+		
 }
