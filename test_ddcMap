@@ -178,9 +178,15 @@ function ddcIxtheo_test() {
 				'262.519' : '!372050379!',//KDF
 				'262.541' : '!372050042!',//KDD
 				'262.596' : '!372050476!',//KDG
+				'262.981' : '!372053378!',//SE
 				'262.983' : '!37205014X!',//KDE
+				'262.983' : '!372053335!',//SC
+				'262.984' : '!372053351!',//SD
+				'262.985' : '!372053351!',//SD
 				'262.985' : '!372050042! !372050476!',//KDD KDG
+				'262.986' : '!372053351!',//SD
 				'262.986' : '!372050042! !372050476!',//KDD KDG
+				'262.987' : '!372053351!',//SD
 				'262.987' : '!372050042! !372050476!',//KDD KDG
 				'264.019' : '!372050379!',//KDF
 				'264.041' : '!372050042!',//KDD
@@ -266,9 +272,6 @@ function ddcIxtheo_test() {
 				'262.55' : '!372050042!',//KDD
 				'262.56' : '!372050042! !372050476!',//KDD KDG
 				'262.92' : '!372049834!',//KDB
-				'262.93' : '!372053319!',//SB
-				'262.94' : '!372053319!',//SB
-				'262.95' : '!372053319!',//SB
 				'264.02' : '!372049834!',//KDB
 				'264.03' : '!37205014X!',//KDE
 				'264.05' : '!372050476!',//KDG
@@ -741,9 +744,15 @@ function ddcIxtheo_test() {
 				'262.519' : '!372050379!',//KDF
 				'262.541' : '!372050042!',//KDD
 				'262.596' : '!372050476!',//KDG
+				'262.981' : '!372053378!',//SE
 				'262.983' : '!37205014X!',//KDE
+				'262.983' : '!372053335!',//SC
+				'262.984' : '!372053351!',//SD
+				'262.985' : '!372053351!',//SD
 				'262.985' : '!372050042! !372050476!',//KDD KDG
+				'262.986' : '!372053351!',//SD
 				'262.986' : '!372050042! !372050476!',//KDD KDG
+				'262.987' : '!372053351!',//SD
 				'262.987' : '!372050042! !372050476!',//KDD KDG
 				'264.019' : '!372050379!',//KDF
 				'264.041' : '!372050042!',//KDD
@@ -829,9 +838,6 @@ function ddcIxtheo_test() {
 				'262.55' : '!372050042!',//KDD
 				'262.56' : '!372050042! !372050476!',//KDD KDG
 				'262.92' : '!372049834!',//KDB
-				'262.93' : '!372053319!',//SB
-				'262.94' : '!372053319!',//SB
-				'262.95' : '!372053319!',//SB
 				'264.02' : '!372049834!',//KDB
 				'264.03' : '!37205014X!',//KDE
 				'264.05' : '!372050476!',//KDG
@@ -1200,6 +1206,7 @@ function ddcIxtheo_test() {
 			var currentRecordFieldEntry = application.activeWindow.title.findTag(tag, 0, true, true, true);
 			var currentRecordFieldValue = currentRecordFieldEntry.substring(5);
 			
+		//	application.activeWindow.title.insertText('current record field val: ' + currentRecordFieldValue);
 
 			var currentRecordFieldValueSplits = currentRecordFieldValue.split(';');
 			for (var split in currentRecordFieldValueSplits) {
@@ -1213,7 +1220,7 @@ function ddcIxtheo_test() {
 				ddcIxTheoMatchHierarchy(str7100, notationList, currentRecordDDCKey, true);
 			}
 		}
-		
+
 		application.activeWindow.pressButton('Enter');
 	}
 }
@@ -1234,16 +1241,16 @@ function ddcIxTheoMatchHierarchy(str7100, notationList, ddcKey, partialMatching)
 
 					if (!str4801 && !str6700) {
 						// add both 4801 and 6700 entries
-						application.activeWindow.title.insertText('\n4801 6700 maschinelles Mapping DDC ' + ddcKey + ' [' + notationKey + ' in Mappingtabelle]' + ' >> IxTheo-Klassifikation ' + notationPPN);
+						application.activeWindow.title.insertText('\n4801 6700 maschinelles Mapping DDC ' + ddcKey + ' [' + notationKey + ' in Mappingtabelle]' + ' > ' + notationPPN);
 						application.activeWindow.title.insertText('\n6700 ' + notationPPN.replace(/ /g, '\n6700'));
 					} else if (str4801 && str6700) {
 						application.activeWindow.title.findTag('4801', 0, true, true, true);
-						application.activeWindow.title.insertText(str4801 + '. - 6700 maschinelles Mapping DDC' + ddcKey + ' [' + notationKey + ' in Mappingtabelle]' + ' >> IxTheo-Klassifikation ' + notationPPN);
-						application.activeWindow.title.insertText('\n6700 ' + notationPPN.replace(/ /g, '\n6700'));
+						application.activeWindow.title.insertText(str4801 + '. - 6700 maschinelles Mapping DDC ' + ddcKey + ' [' + notationKey + ' in Mappingtabelle]' + ' > ' + notationPPN);
+						application.activeWindow.title.insertText('\n6700 ' + notationPPN.replace(/ /g, '\n6700'));// do nothing
 					} else if (str4801 && !str6700) {
 						// update exisiting 4801 entry and add new 6700 entries
 						application.activeWindow.title.findTag('4801', 0, true, true, true);
-						application.activeWindow.title.insertText(str4801 + '. - 6700 maschinelles Mapping DDC ' + ddcKey + ' [' + notationKey + ' in Mappingtabelle]' + ' >> IxTheo-Klassifikation ' + notationPPN);
+						application.activeWindow.title.insertText(str4801 + '. - 6700 maschinelles Mapping DDC ' + ddcKey + ' [' + notationKey + ' in Mappingtabelle]' + ' > ' + notationPPN);
 						application.activeWindow.title.insertText('\n6700 ' + notationPPN.replace(/ /g, '\n6700'));
 					} else if (!str4801 && str6700) {
 						;// do nothing
@@ -1251,18 +1258,34 @@ function ddcIxTheoMatchHierarchy(str7100, notationList, ddcKey, partialMatching)
 				} else {
 					application.activeWindow.title.endOfBuffer(false);
 					application.activeWindow.title.findTag('E*', 0, true, true, true);
-					application.activeWindow.title.insertText('\nE* l01') 
-					application.activeWindow.title.insertText('\n6700 ' + notationPPN.replace(/ /g, '\n6700'))
+					//application.activeWindow.title.insertText('\nE* aaal01\n7100$jn\n6700 ' + notationPPN.replace(/ /g, '\n6700') + '\n4801 ' + str4801 +' \n4801 6700 maschinelles Mapping DDC ' + ddcKey + ' [' + notationKey + ' in Mappingtabelle]' + ' > ' + notationPPN);
+					
+					application.activeWindow.title.insertText('\nE* aaal01\n7100$jn') 
 					application.activeWindow.title.findTag('7100', 0, true, true, true);
 					application.activeWindow.title.insertText('\n7100$jn')
+					application.activeWindow.title.insertText('\n6700 ' + notationPPN.replace(/ /g, '\n6700'))
+					application.activeWindow.title.insertText('\n4801')
+					application.activeWindow.title.replaceAll('7100$jn', '', false, false) 
+					application.activeWindow.title.insertText(' 6700 maschinelles Mapping DDC ' + ddcKey + ' [' + notationKey + ' in Mappingtabelle]' + ' > ' + notationPPN);
 					application.activeWindow.title.findTag('4801', 0, true, true, true);
-					application.activeWindow.title.insertText('\n4801 6700 maschinelles Mapping DDC mit neuem Exemplarsatz ' + ddcKey + ' [' + notationKey + ' in Mappingtabelle]' + ' >> IxTheo-Klassifikation ' + notationPPN + '. - ' + str4801);
+				    application.activeWindow.title.replaceAll('4801', '', false, false) 
+					
+					//\n7100$jn\n6700 ' + notationPPN.replace(/ /g, '\n6700') + ' \n4801 6700 maschinelles Mapping DDC ' + ddcKey + ' [' + notationKey + ' in Mappingtabelle]' + ' > ' + notationPPN);
+					//application.activeWindow.title.findTag('4801', 0, true, true, true);
+					//application.activeWindow.title.endOfBuffer(false);
+					//application.activeWindow.title.insertText('\n4801');
+					//application.activeWindow.title.findTag('4801', 0, true, true, true);
+					//application.activeWindow.title.insertText(str4801 + ' 6700 maschinelles Mapping DDC ' + ddcKey + ' [' + notationKey + ' in Mappingtabelle]' + ' > ' + notationPPN);
+					//+ str4801 +' \n4801 6700 maschinelles Mapping DDC ' + ddcKey + ' [' + notationKey + ' in Mappingtabelle]' + ' > ' + notationPPN);
 				}
 
 				return true;
 			}
 		}
 	}
+
+	return false;
+};
 
 	return false;
 };
