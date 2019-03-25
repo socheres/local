@@ -4,7 +4,7 @@ function Ssg0Einzel() {
 	application.activeWindow.command("k", false);
 	var str5056 = application.activeWindow.title.findTag("5056", 0, true, true, true);
 	
-	if (str5056.match(/\s?;?\s1$|\s?;?\s1[^0-9]/g)) {
+	if (str5056.match(/\s?;?\s0$|\s?;?\s0[^0-9]/g)) {
         
 		application.activeWindow.pressButton("FE");
                                 
@@ -14,7 +14,7 @@ function Ssg0Einzel() {
                 else if(str5056 != "" && !str5056.match(/FID/g)) {
              
 					application.activeWindow.title.findTag("5056", 0, true, true, true);                          
-					application.activeWindow.title.insertText(str5056 + "; 0");       
+					application.activeWindow.title.insertText(str5056 + "$a0");       
                                  
                                 }
                
@@ -45,7 +45,7 @@ function Ssg1Einzel() {
                 else if(str5056 != "" && !str5056.match(/FID/g)) {
              
 					application.activeWindow.title.findTag("5056", 0, true, true, true);                          
-					application.activeWindow.title.insertText(str5056 + "; 1");       
+					application.activeWindow.title.insertText(str5056 + "$a1");       
                                  
                                 }
                
@@ -86,7 +86,7 @@ var count = parseInt(strCount);
                 else if(str5056 != "" && !str5056.match(/FID/g)) {
              
 					application.activeWindow.title.findTag("5056", 0, true, true, true);                          
-					application.activeWindow.title.insertText(str5056 + "; 1");       
+					application.activeWindow.title.insertText(str5056 + "$a1");       
                                  
                                 }
                
@@ -127,7 +127,7 @@ var count = parseInt(strCount);
                 else if(str5056 != "" && !str5056.match(/FID/g)) {
              
 					application.activeWindow.title.findTag("5056", 0, true, true, true);                          
-					application.activeWindow.title.insertText(str5056 + "; 0");       
+					application.activeWindow.title.insertText(str5056 + "$a0");       
                                  
                                 }
                
