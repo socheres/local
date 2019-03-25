@@ -1,0 +1,144 @@
+function Ssg0Einzel() {
+	var str5056 = "";
+	
+	application.activeWindow.command("k", false);
+	var str5056 = application.activeWindow.title.findTag("5056", 0, true, true, true);
+	
+	if (str5056.match(/\s?;?\s1$|\s?;?\s1[^0-9]/g)) {
+        
+		application.activeWindow.pressButton("FE");
+                                
+                   }     
+                                 
+                                
+                else if(str5056 != "" && !str5056.match(/FID/g)) {
+             
+					application.activeWindow.title.findTag("5056", 0, true, true, true);                          
+					application.activeWindow.title.insertText(str5056 + "; 0");       
+                                 
+                                }
+               
+                else if (str5056 == "" || str5056.match(/FID/))  {
+                       
+					application.activeWindow.title.endOfBuffer(false);
+					application.activeWindow.title.insertText("\n5056 0");
+                  
+                   }
+					application.activeWindow.pressButton("Enter");       
+                               
+                }
+
+//5056 1
+function Ssg1Einzel() {
+	var str5056 = "";
+	
+	application.activeWindow.command("k", false);
+	var str5056 = application.activeWindow.title.findTag("5056", 0, true, true, true);
+	
+	if (str5056.match(/\s?;?\s1$|\s?;?\s1[^0-9]/g)) {
+        
+		application.activeWindow.pressButton("FE");
+                                
+                   }     
+                                 
+                                
+                else if(str5056 != "" && !str5056.match(/FID/g)) {
+             
+					application.activeWindow.title.findTag("5056", 0, true, true, true);                          
+					application.activeWindow.title.insertText(str5056 + "; 1");       
+                                 
+                                }
+               
+                else if (str5056 == "" || str5056.match(/FID/))  {
+                       
+					application.activeWindow.title.endOfBuffer(false);
+					application.activeWindow.title.insertText("\n5056 1");
+                  
+                   }
+					application.activeWindow.pressButton("Enter");       
+                               
+                }
+
+//5056 1 global	
+				
+function Ssg1Global()  {
+var str5056 = "";
+
+// Abruf des Sets + Nummer
+var strSet = "S" + application.activeWindow.getVariable("P3GSE");
+// Abruf der Setgröße (Sätze gesamt)
+var strCount = application.activeWindow.getVariable("P3GSZ");       
+var count = parseInt(strCount);
+               
+                for (var i = 1; i <= count; i++) {
+
+                var cmd = "k " + strSet + " " + i;   
+                application.activeWindow.command(cmd, false);
+                str5056 = application.activeWindow.title.findTag("5056", 0, true, true, true);
+               
+     if (str5056.match(/\s?;?\s1$|\s?;?\s1[^0-9]/g)) {
+        
+		application.activeWindow.pressButton("FE");
+                                
+                   }     
+                                 
+                                
+                else if(str5056 != "" && !str5056.match(/FID/g)) {
+             
+					application.activeWindow.title.findTag("5056", 0, true, true, true);                          
+					application.activeWindow.title.insertText(str5056 + "; 1");       
+                                 
+                                }
+               
+                else if (str5056 == "" || str5056.match(/FID/))  {
+                       
+					application.activeWindow.title.endOfBuffer(false);
+					application.activeWindow.title.insertText("\n5056 1");
+                  
+                   }
+                application.activeWindow.pressButton("Enter");       
+                               
+                }                             
+}  
+
+//5056 0 global
+function Ssg0Global()  {
+var str5056 = "";
+
+// Abruf des Sets + Nummer
+var strSet = "S" + application.activeWindow.getVariable("P3GSE");
+// Abruf der Setgröße (Sätze gesamt)
+var strCount = application.activeWindow.getVariable("P3GSZ");       
+var count = parseInt(strCount);
+               
+                for (var i = 1; i <= count; i++) {
+
+                var cmd = "k " + strSet + " " + i;   
+                application.activeWindow.command(cmd, false);
+                str5056 = application.activeWindow.title.findTag("5056", 0, true, true, true);
+               
+     if (str5056.match(/\s?;?\s0$|\s?;?\s0[^1-9]/g)) {
+        
+		application.activeWindow.pressButton("FE");
+                                
+                   }     
+                                 
+                                
+                else if(str5056 != "" && !str5056.match(/FID/g)) {
+             
+					application.activeWindow.title.findTag("5056", 0, true, true, true);                          
+					application.activeWindow.title.insertText(str5056 + "; 0");       
+                                 
+                                }
+               
+                else if (str5056 == "" || str5056.match(/FID/))  {
+                       
+					application.activeWindow.title.endOfBuffer(false);
+					application.activeWindow.title.insertText("\n5056 0");
+                  
+                   }
+                application.activeWindow.pressButton("Enter");       
+                               
+                }                             
+} 
+	
