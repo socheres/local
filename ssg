@@ -4,7 +4,7 @@ function Ssg0Einzel() {
 	application.activeWindow.command("k", false);
 	var str5056 = application.activeWindow.title.findTag("5056", 0, true, true, true);
 	
-	if (str5056.match(/\s?;?\s0$|\s?;?\s0[^0-9]/g)) {
+	if (str5056.match(/0|\s?\$a?0[^0-9]/g)) {
         
 		application.activeWindow.pressButton("FE");
                                 
@@ -35,7 +35,7 @@ function Ssg1Einzel() {
 	application.activeWindow.command("k", false);
 	var str5056 = application.activeWindow.title.findTag("5056", 0, true, true, true);
 	
-	if (str5056.match(/\s?;?\s1$|\s?;?\s1[^0-9]/g)) {
+	if (str5056.match(/1|\s?\$a?1[^0-9]/g)) {
         
 		application.activeWindow.pressButton("FE");
                                 
@@ -76,7 +76,7 @@ var count = parseInt(strCount);
                 application.activeWindow.command(cmd, false);
                 str5056 = application.activeWindow.title.findTag("5056", 0, true, true, true);
                
-     if (str5056.match(/\s?;?\s1$|\s?;?\s1[^0-9]/g)) {
+     if (str5056.match(/1|\s?\$a?1[^0-9]/g)) {
         
 		application.activeWindow.pressButton("FE");
                                 
@@ -117,7 +117,7 @@ var count = parseInt(strCount);
                 application.activeWindow.command(cmd, false);
                 str5056 = application.activeWindow.title.findTag("5056", 0, true, true, true);
                
-     if (str5056.match(/\s?;?\s0$|\s?;?\s0[^1-9]/g)) {
+     if (str5056.match(/0|\s?\$a?0[^0-9]/g)) {
         
 		application.activeWindow.pressButton("FE");
                                 
