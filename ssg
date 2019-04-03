@@ -1,4 +1,5 @@
-function Ssg0Einzel() {
+//5056 0 	
+ function Ssg0Einzel() {
 	var str5056 = "";
 	
 	application.activeWindow.command("k", false);
@@ -18,7 +19,7 @@ function Ssg0Einzel() {
                                  
                                 }
                
-                else if (str5056 == "" || str5056.match(/FID/))  {
+                else if (str5056 == "" || str5056.match(/FID/g))  {
                        
 					application.activeWindow.title.endOfBuffer(false);
 					application.activeWindow.title.insertText("\n5056 0");
@@ -31,11 +32,11 @@ function Ssg0Einzel() {
 //5056 1
 function Ssg1Einzel() {
 	var str5056 = "";
-	
+	var str2240 = "";
 	application.activeWindow.command("k", false);
 	var str5056 = application.activeWindow.title.findTag("5056", 0, true, true, true);
-	
-	if (str5056.match(/5056 1|\\*\$a1/g)) {
+	var str2240 = application.activeWindow.title.findTag("2240", 0, true, true, true);
+	if (str5056.match(/5056 1|\\*\$a1/g) || str2240.match(/GBV/g)) {
         
 		application.activeWindow.pressButton("FE");
                                 
@@ -43,13 +44,13 @@ function Ssg1Einzel() {
                                  
                                 
                 else if(str5056 != "" && !str5056.match(/FID/g)) {
-             
+					
 					application.activeWindow.title.findTag("5056", 0, true, true, true);                          
 					application.activeWindow.title.insertText(str5056 + "$a1");       
                                  
                                 }
                
-                else if (str5056 == "" || str5056.match(/FID/))  {
+                else if (str5056 == "" || str5056.match(/FID/g))  {
                        
 					application.activeWindow.title.endOfBuffer(false);
 					application.activeWindow.title.insertText("\n5056 1");
@@ -75,8 +76,8 @@ var count = parseInt(strCount);
                 var cmd = "k " + strSet + " " + i;   
                 application.activeWindow.command(cmd, false);
                 str5056 = application.activeWindow.title.findTag("5056", 0, true, true, true);
-               
-     if (str5056.match(/5056 1|\\*\$a1/g)) {
+                str2240 = application.activeWindow.title.findTag("2240", 0, true, true, true);
+     if (str5056.match(/5056 1|\\*\$a1/g) || str2240.match(/GBV/g)) {
         
 		application.activeWindow.pressButton("FE");
                                 
@@ -90,7 +91,7 @@ var count = parseInt(strCount);
                                  
                                 }
                
-                else if (str5056 == "" || str5056.match(/FID/))  {
+                else if (str5056 == "" || str5056.match(/FID/g))  {
                        
 					application.activeWindow.title.endOfBuffer(false);
 					application.activeWindow.title.insertText("\n5056 1");
@@ -117,7 +118,7 @@ var count = parseInt(strCount);
                 application.activeWindow.command(cmd, false);
                 str5056 = application.activeWindow.title.findTag("5056", 0, true, true, true);
                
-     if (str5056.match(/5056 0|\\*\$a0/g)) {
+     if (str5056.match(/5056 0|\\*\$a0/g) || str2240.match(/GBV/g)) {
         
 		application.activeWindow.pressButton("FE");
                                 
@@ -131,7 +132,7 @@ var count = parseInt(strCount);
                                  
                                 }
                
-                else if (str5056 == "" || str5056.match(/FID/))  {
+                else if (str5056 == "" || str5056.match(/FID/g))  {
                        
 					application.activeWindow.title.endOfBuffer(false);
 					application.activeWindow.title.insertText("\n5056 0");
@@ -140,5 +141,4 @@ var count = parseInt(strCount);
                 application.activeWindow.pressButton("Enter");       
                                
                 }                             
-} 
-	
+}
